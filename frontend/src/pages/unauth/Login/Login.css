@@ -1,0 +1,7 @@
+.set-back {
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover !important;
+    background: url("https://ionicframework.com/docs/img/demos/thumbnail.svg");
+    height: 100vh;
+}
