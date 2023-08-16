@@ -1,0 +1,100 @@
+@font-face {
+  font-family: satoshi-black;
+  src: url(./../assets/fonts/satoshi-black.otf);
+}
+@font-face {
+  font-family: satoshi-bold;
+  src: url(./../assets/fonts/satoshi-bold.otf);
+}
+@font-face {
+  font-family: satoshi-regular;
+  src: url(./../assets/fonts/satoshi-regular.otf);
+}
+@font-face {
+  font-family: satoshi-medium;
+  src: url(./../assets/fonts/satoshi-medium.otf);
+}
+* {
+  padding: 0;
+  margin: 0;
+  font-family: satoshi-regular;
+}
+b,
+h1,
+h2 {
+  font-family: satoshi-black ;
+}
+h3 {
+  font-family: satoshi-bold !important;
+}
+.btn {
+  font-family: satoshi-bold !important;
+  padding: 10px 15px !important;
+}
+h1 {
+  font-size: 55px;
+}
+h2 {
+  font-size: 40px;
+}
+.font-large {
+  font-size: 30px;
+}
+p {
+  font-family: satoshi-bold;
+}
+b,
+.nav-link {
+  font-family: satoshi-bold !important;
+  color: #000;
+}
+.bg-cream {
+  background-color: #eff4de;
+}
+.btn-green {
+  background-color: #c1e449;
+  padding: 10px 20px;
+  font-family: satoshi-bold !important;
+}
+
+.navbar-nav {
+  display: flex;
+  align-items: center;
+}
+.font-medium {
+  font-size: 18px;
+}
+.para {
+  font-family: satoshi-regular !important;
+  color: #737373;
+}
+.color-y {
+  color: #c1e449;
+}
+.bg-green {
+  background-color: #3fb282;
+}
+.margin-100 {
+  margin-left: 100px;
+  width: 20px;
+}
+.btn-l-outline {
+  background-color: transparent;
+  border: 1px solid #c1e449;
+  padding: 10px 15px !important;
+  color: #c1e449;
+  width: 240px;
+  text-align: left;
+}
+.btn-l {
+  background-color: #c1e449;
+  padding: 15px !important;
+  width: 240px;
+  font-family: satoshi-bold !important;
+}
+.float-right {
+  float: right;
+}
+.float-left {
+  float: left;
+}

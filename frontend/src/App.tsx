@@ -1,4 +1,3 @@
-import { Redirect, Route } from "react-router-dom";
 import { IonApp, IonRouterOutlet, setupIonicReact } from "@ionic/react";
 import { IonReactRouter } from "@ionic/react-router";
 import Home from "./pages/auth/Home/Home";
@@ -20,19 +19,51 @@ import "@ionic/react/css/display.css";
 import "react-toastify/dist/ReactToastify.css";
 /* Theme variables */
 import "./theme/variables.css";
+import "./theme/main.css";
+import Signup from "./pages/unauth/Signup/Signup";
+import GetData from "./pages/unauth/Signup/GetData";
 import { ToastContainer } from "react-toastify";
+import Landing from "./pages/unauth/Landing/Landing";
+import Login from "./pages/unauth/Login/Login";
+import PublicRoute from "./pages/PublicRoute";
+import PrivateRoute from "./pages/PrivateRoute";
+import { Redirect, Route } from "react-router";
 
-setupIonicReact();
+setupIonicReact({
+  animated: false,
+});
 
 const App: React.FC = () => (
   <IonApp>
     <IonReactRouter>
       <IonRouterOutlet>
-        <Route exact path="/home" component={Home} />
+        <PublicRoute restricted={true} component={Landing} path="/" exact />
+        <PublicRoute
+          restricted={true}
+          component={Landing}
+          path="/welcome"
+          exact
+        />
+        <PublicRoute restricted={true} component={Login} path="/login" exact />
+        <PublicRoute
+          restricted={true}
+          component={Signup}
+          path="/signup"
+          exact
+        />
+        <PublicRoute
+          restricted={true}
+          component={GetData}
+          path="/getdata"
+          exact
+        />
+        <PrivateRoute component={Home} path="/home" exact />
         <Route exact path="/">
-          <Redirect to="/home" />
+          <Redirect to="/welcome" />
         </Route>
-        {/* <Route path="*" component={Home} /> */}
+        <Route>
+          <Landing />
+        </Route>
       </IonRouterOutlet>
       <ToastContainer position="top-right" />
     </IonReactRouter>

@@ -11,6 +11,7 @@ import {
   IonRow,
   useIonViewWillEnter,
 } from "@ionic/react";
+import logo from "./../../../assets/images/logo.png";
 import "./Login.css";
 import { useHistory } from "react-router";
 import { API } from "../../../services/Api";
@@ -63,49 +64,89 @@ const Login: React.FC = () => {
         console.log(error);
       });
   });
-  const login = () => {
-    localStorage.setItem("oak-crypto", "sdaadasdasd");
-    window.location.assign("/");
-  };
   return (
     <IonPage>
       <IonContent fullscreen>
         <IonGrid>
-          <IonRow>
-            <IonCol size="7" className="ion-hide-md-down set-back"></IonCol>
-            <IonCol size="12" sizeMd="5" style={{ padding: "20px" }}>
+          <IonRow class="ion-justify-content-center">
+            <IonCol
+              style={{ marginTop: "50px" }}
+              size="3"
+              className="ion-hide-md-down "
+            >
+              <p className="logo">
+                <img src={logo}></img>
+              </p>
+              <p className="content">
+                Your use of OAK currency at participating merchants will help
+                support the community while earning 5% cashback
+              </p>
+              <IonItem lines="none" className="mt-10">
+                <p slot="start" className="circle">
+                  1
+                </p>
+                <IonLabel class="ion-text-wrap" style={{ marginLeft: "48px" }}>
+                  <p className="heading">Exchange your USD for OAK</p>
+                  <p className="heading2">
+                    Fill out your information to purchase OAK currency
+                  </p>
+                </IonLabel>
+              </IonItem>
+              <IonItem lines="none" className="mt-10">
+                <p slot="start" className="circle">
+                  2
+                </p>
+                <IonLabel class="ion-text-wrap" style={{ marginLeft: "48px" }}>
+                  <p className="heading">Download a crypto wallet</p>
+                  <p className="heading2">
+                    Take your currency with you in a mobile crypto wallet
+                  </p>
+                </IonLabel>
+              </IonItem>
+              <IonItem lines="none" className="mt-10">
+                <p slot="start" className="circle">
+                  3
+                </p>
+                <IonLabel class="ion-text-wrap" style={{ marginLeft: "48px" }}>
+                  <p className="heading">Spend your OAK</p>
+                  <p className="heading2">
+                    Use your OAK currency at participating merchants
+                  </p>
+                </IonLabel>
+              </IonItem>
+            </IonCol>
+            <IonCol size="12" sizeMd="3" style={{ padding: "30px" }}>
               <IonRow>
-                <IonCol size="2" style={{ marginTop: "100px" }}>
-                  <img
-                    style={{ height: "80px", borderRadius: "20px" }}
-                    src="https://ionicframework.com/docs/img/demos/thumbnail.svg"
-                    alt="logo"
-                  />
-                </IonCol>
                 <IonCol
                   style={{
                     display: "flex",
                     alignItems: "center",
-                    marginTop: "80px",
+                    marginTop: "50px",
                   }}
                 >
-                  <h2>OAK Crypto</h2>
+                  <h2
+                    style={{
+                      fontFamily: "Satoshi Variable",
+                      fontSize: "24px",
+                      fontStyle: "normal",
+                      fontWeight: "300",
+                      lineHeight: "normal",
+                    }}
+                  >
+                    Get OAK currency
+                  </h2>
                 </IonCol>
               </IonRow>
               <IonRow>
                 <IonCol size="12">
-                  <IonLabel>Email address</IonLabel>
-                  <IonItem
+                  <IonLabel className="mt-15">Email address</IonLabel>
+                  <IonInput
                     fill="outline"
                     style={{ marginTop: "10px", marginBottom: "10px" }}
-                  >
-                    <IonInput
-                      autocomplete="new-password"
-                      placeholder="Your email"
-                      type="email"
-                      {...register("username", { required: true })}
-                    ></IonInput>
-                  </IonItem>
+                    autocomplete="new-password"
+                    type="email"
+                    {...register("username", { required: true })}
+                  ></IonInput>
                   <span style={{ float: "left", color: "red" }}>
                     {errors.username?.message}
                   </span>
@@ -113,38 +154,44 @@ const Login: React.FC = () => {
               </IonRow>
               <IonRow>
                 <IonCol size="12">
-                  <IonLabel>Password</IonLabel>
-                  <IonItem
+                  <IonLabel className="mt-15">Password</IonLabel>
+                  <IonInput
                     fill="outline"
                     style={{ marginTop: "10px", marginBottom: "10px" }}
-                  >
-                    <IonInput
-                      autocomplete="new-password"
-                      placeholder="Your Password"
-                      type={ptype}
-                      {...register("password", { required: true })}
-                    ></IonInput>
-                    {ptype == "text" && (
-                      <IonIcon
-                        className="suffix-icon"
-                        onClick={() => setptype("password")}
-                        style={{ marginTop: "14px" }}
-                        color="dark"
-                        icon={eyeOff}
-                        slot="end"
-                      ></IonIcon>
-                    )}
-                    {ptype == "password" && (
-                      <IonIcon
-                        className="suffix-icon"
-                        style={{ marginTop: "14px" }}
-                        onClick={() => setptype("text")}
-                        color="dark"
-                        icon={eye}
-                        slot="end"
-                      ></IonIcon>
-                    )}
-                  </IonItem>
+                    autocomplete="new-password"
+                    type={ptype}
+                    {...register("password", { required: true })}
+                  ></IonInput>
+                  {ptype == "text" && (
+                    <IonIcon
+                      className="suffix-icon"
+                      onClick={() => setptype("password")}
+                      style={{
+                        marginTop: "45px",
+                        zIndex: "9999",
+                        position: "absolute",
+                        right: "18px",
+                        top: "5px",
+                      }}
+                      color="dark"
+                      icon={eyeOff}
+                    ></IonIcon>
+                  )}
+                  {ptype == "password" && (
+                    <IonIcon
+                      className="suffix-icon"
+                      style={{
+                        marginTop: "45px",
+                        zIndex: "9999",
+                        position: "absolute",
+                        right: "18px",
+                        top: "5px",
+                      }}
+                      onClick={() => setptype("text")}
+                      color="dark"
+                      icon={eye}
+                    ></IonIcon>
+                  )}
                   <span style={{ float: "left", color: "red" }}>
                     {errors.password?.message}
                   </span>
@@ -152,16 +199,12 @@ const Login: React.FC = () => {
               </IonRow>
               <IonRow>
                 <IonCol size="12" style={{ textAlign: "center" }}>
-                  <IonButton
-                    style={{ textTransform: "none" }}
-                    shape="round"
-                    onClick={onSubmit}
-                  >
+                  <button className="btn-large2" onClick={onSubmit}>
                     Login
-                  </IonButton>
+                  </button>
                 </IonCol>
               </IonRow>
-              <IonRow>
+              <IonRow className="mt-10">
                 <IonCol size="12" style={{ textAlign: "center" }}>
                   <p>
                     Don't have an account?{" "}

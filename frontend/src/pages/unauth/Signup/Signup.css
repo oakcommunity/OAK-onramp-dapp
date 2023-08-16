@@ -1,7 +1,124 @@
 .set-back {
-    background-position: center center;
-    background-repeat: no-repeat;
-    background-size: cover !important;
-    background: url("https://ionicframework.com/docs/img/demos/thumbnail.svg");
-    height: 100vh;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover !important;
+  background: url("https://ionicframework.com/docs/img/demos/thumbnail.svg");
+  height: 100vh;
+}
+.logo {
+  color: #3fb282;
+  margin-left: 16px;
+  font-family: "Satoshi Variable";
+  font-size: 40px;
+  font-style: normal;
+  font-weight: 800;
+  line-height: normal;
+  margin-bottom: 10px !important;
+}
+.content {
+  margin-left: 16px;
+  color: var(--gray-3, #828282);
+  font-family: "Satoshi Variable";
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+}
+.circle {
+  background: #3fb282;
+  height: 24px;
+  width: 24px;
+  border-radius: 50%;
+  color: var(--oak-green-vibrant, #c1e449);
+  text-align: center;
+  font-family: "Satoshi Variable";
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  position: absolute;
+  top: -5px;
+}
+ion-item {
+  --background: transparent;
+  .heading {
+    color: var(--gray-1, #333);
+    font-family: "Satoshi Variable";
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 900;
+    line-height: normal;
+  }
+  .heading2 {
+    color: var(--gray-3, #828282);
+    font-family: "Satoshi Variable";
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+  }
+}
+ion-button {
+  color: var(--gray-1, #333);
+  text-align: center;
+  font-family: "Satoshi Variable";
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 900;
+  line-height: normal;
+}
+.sc-ion-input-md-h:not(.legacy-input){
+  min-height: 50px;
+ 
+ 
+}
+ion-label{
+  font-weight: bold !important;
+  font-size: 14px !important;
+}
+.input-fill-outline.sc-ion-input-md-h{
+  --border-radius: 8px;
+}
+.input-fill-outline.sc-ion-input-md-h{
+--border-color: #d9d9d9 !important;
+}
+.icon-inner, .ionicon, svg {
+  --margin-top: 3px !important;
+}
+.suffix-icon{
+padding-top: 3px !important;
+
+}
+
+.btn-large2{
+  font-weight: bold;
+  box-shadow: none;
+  padding:15px 25px;
+  color: #000 !important;
+  background-color: #c1e449;
+  border-radius: 10px;
+  font-size: 16px;
+  font-weight: bold;
+  width: 100%;
+  font-family: satoshi-bold !important;
+  margin-top: 10px;
+}
+
+.btn-clr{
+  color: #000 !important;
+}
+.button-native{
+background:red !important
+}
+.mt-10{
+  margin-top: 20px !important;
+}
+.pr-5{
+  padding-right: 5px;
+}
+.pl-5{
+  padding-left: 5px;
 }

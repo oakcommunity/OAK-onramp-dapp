@@ -22,6 +22,12 @@ r.group("/v1", rt => {
 
     rt.get('/user/bank/add-manually', ValidateUserToken, Bank.addBankAccount);
     rt.get('/user/bank/buy-crypto', ValidateUserToken, Bank.buyCrypto);
+    rt.post('/user/bank/transaction-details', ValidateUserToken, Bank.transactionDetails);
+
+    rt.get('/user/bank/create-link-token', ValidateUserToken, Bank.createLinkToken);
+    rt.post('/user/bank/link-external-account', ValidateUserToken, Bank.linkAllExternalAccounts);
+    
+    rt.get('/user/transfer/eth-eth', ValidateUserToken, Bank.transferCrypto);
 });
 r.get('*', (req, res) => {
     res.send({
