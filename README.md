@@ -17,3 +17,21 @@ http://13.56.134.190
 	> This account details will be used to buy crypto.
 4. Was the crypto account is connected successfully, user can now view the balance in the crypto account
 5. Option to disconnect connected wallet.
+
+
+
+Overview for Swap
+
+Installation
+
+Hardhat, Truffle (npm)
+
+$ npm install @openzeppelin/contracts
+OpenZeppelin Contracts features a stable API, which means that your contracts won't break unexpectedly when upgrading to a newer minor version.
+
+Foundry (git)
+
+Warning When installing via git, it is a common error to use the master branch. This is a development branch that should be avoided in favor of tagged releases. The release process involves security measures that the master branch does not guarantee.
+Warning Foundry installs the latest version initially, but subsequent forge update commands will use the master branch.
+$ forge install OpenZeppelin/openzeppelin-contracts
+Add @openzeppelin/contracts/=lib/openzeppelin-contracts/contracts/ in remappings.txt.
