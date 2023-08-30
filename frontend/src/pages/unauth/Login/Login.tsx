@@ -32,12 +32,7 @@ const Login: React.FC = () => {
   };
   const formSchema = Yup.object().shape({
     password: Yup.string()
-      .required("Password is mendatory")
-      .min(6, "Password must be at 6 character long")
-      .matches(
-        /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/,
-        "Must Contain 8 Characters, One Uppercase, One Lowercase, One Number and One Special Case Character"
-      ),
+      .required("Password is required"),
     username: Yup.string()
       .required("Email is required")
       .email("Invalid email address"),
@@ -143,7 +138,7 @@ const Login: React.FC = () => {
                   <IonInput
                     fill="outline"
                     style={{ marginTop: "10px", marginBottom: "10px" }}
-                    autocomplete="new-password"
+                    autocomplete="email"
                     type="email"
                     {...register("username", { required: true })}
                   ></IonInput>
@@ -158,7 +153,7 @@ const Login: React.FC = () => {
                   <IonInput
                     fill="outline"
                     style={{ marginTop: "10px", marginBottom: "10px" }}
-                    autocomplete="new-password"
+                    autocomplete="current-password"
                     type={ptype}
                     {...register("password", { required: true })}
                   ></IonInput>

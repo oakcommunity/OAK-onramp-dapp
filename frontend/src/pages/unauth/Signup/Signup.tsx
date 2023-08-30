@@ -64,52 +64,48 @@ const Signup: React.FC = () => {
       .required("Email is required")
       .email("Invalid email address"),
     phone: Yup.string()
-      .required("Phone is Mandatory")
-      .min(10, "Phone must be at 10 number")
-      .max(10, "Phone must be at 10 number"),
-    fname: Yup.string().required("First name is Mandatory"),
-    lname: Yup.string().required("Last name is Mandatory"),
-    dob: Yup.string().required("Date of birth is Mandatory"),
-    address_line_1: Yup.string().required("Street address is Mandatory"),
+      .required("Phone is required")
+      .min(10, "Phone must contain 10 digits")
+      .max(10, "Phone must contain 10 digits"),
+    fname: Yup.string().required("First name is required"),
+    lname: Yup.string().required("Last name is required"),
+    dob: Yup.string().required("Date of birth is required"),
+    address_line_1: Yup.string().required("Street address is required"),
     address_line_2: Yup.string(),
-    city: Yup.string().required("City is Mandatory"),
+    city: Yup.string().required("City is required"),
     zip: Yup.string()
-      .required("Postal code is Mandatory")
-      .min(5, "Postal must be at 5 number")
-      .max(5, "Postal must be at 5 number"),
-    state: Yup.string().required("State is Mandatory"),
+      .required("Postal code is required")
+      .min(5, "Postal code must contain 5 digits")
+      .max(5, "Postal code must contain 5 digits"),
+    state: Yup.string().required("State is required"),
     signed_agreement_id: Yup.string(),
     ssn: Yup.string()
-      .required("SSN is Mandatory")
-      .min(9, "SSN must be at 9 number")
-      .max(9, "SSN must be at 9 number"),
+      .required("SSN is required")
+      .min(9, "SSN must contain 9 digits")
+      .max(9, "SSN must contain 9 digits"),
     password: Yup.string()
       .required("Password is required")
-      .min(6, "Password length should be at least 6 characters")
-      .max(12, "Password cannot exceed more than 12 characters")
+      .min(6, "Password should be at least 8 characters")
       .matches(
         /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/,
-        "Must Contain 8 Characters, One Uppercase, One Lowercase, One Number and One Special Case Character"
+        "Must contain at least 8 characters. One Uppercase, One Lowercase, One Number and One Special Case Character"
       ),
     confirm_password: Yup.string()
-      .required("Confirm Password is required")
-      .min(6, "Password length should be at least 6 characters")
-      .max(12, "Password cannot exceed more than 12 characters")
+      .required("Password Confirmation is required")
+      .min(6, "Password should be at least 8 characters")
       .oneOf([Yup.ref("password")], "Password & Confirm password are not same")
       .matches(
         /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/,
-        "Must Contain 8 Characters, One Uppercase, One Lowercase, One Number and One Special Case Character"
+        "Must contain at least 8 characters. One Uppercase, One Lowercase, One Number and One Special Case Character"
       ),
-    term: Yup.boolean().oneOf([true], "Terms is Mandatory"),
+    term: Yup.boolean().oneOf([true], "Terms and Conditions are required"),
   });
   const formOptions = { resolver: yupResolver(formSchema) };
   const { register, handleSubmit, formState, setValue } = useForm(formOptions);
   const { errors } = formState;
   const onSubmit = handleSubmit((data) => {
-    console.log(data);
     API.common_api("auth/register-user", data)
       .then((response: any) => {
-        console.log(response.data);
         if (response.data.status == 1) {
           toast.success(response.data.message);
           window.location.assign("/");
@@ -206,7 +202,7 @@ const Signup: React.FC = () => {
                   <IonInput
                     fill="outline"
                     style={{ marginTop: "10px", marginBottom: "10px" }}
-                    autocomplete="new-password"
+                    autocomplete="given-name"
                     type="text"
                     {...register("fname", { required: true })}
                   ></IonInput>
@@ -219,7 +215,7 @@ const Signup: React.FC = () => {
                   <IonInput
                     fill="outline"
                     style={{ marginTop: "10px", marginBottom: "10px" }}
-                    autocomplete="new-password"
+                    autocomplete="family-name"
                     type="text"
                     {...register("lname", { required: true })}
                   ></IonInput>
@@ -234,7 +230,7 @@ const Signup: React.FC = () => {
                   <IonInput
                     fill="outline"
                     style={{ marginTop: "10px", marginBottom: "10px" }}
-                    autocomplete="new-password"
+                    autocomplete="street-address"
                     type="text"
                     {...register("address_line_1", { required: true })}
                   ></IonInput>
@@ -247,7 +243,7 @@ const Signup: React.FC = () => {
                   <IonInput
                     fill="outline"
                     style={{ marginTop: "10px", marginBottom: "10px" }}
-                    autocomplete="new-password"
+                    autocomplete="address-level2"
                     type="text"
                     {...register("city", { required: true })}
                   ></IonInput>
@@ -255,12 +251,25 @@ const Signup: React.FC = () => {
                     {errors.city?.message}
                   </span>
                 </IonCol>
+                <IonCol size="6" className="pr-5">
+                  <IonLabel>State</IonLabel>
+                  <IonInput
+                    fill="outline"
+                    style={{ marginTop: "10px", marginBottom: "10px" }}
+                    autocomplete="address-level1"
+                    type="text"
+                    {...register("state", { required: true })}
+                  ></IonInput>
+                  <span style={{ float: "left", color: "red" }}>
+                    {errors.state?.message}
+                  </span>
+                </IonCol>
                 <IonCol size="6" className="pl-5">
                   <IonLabel>Postal code</IonLabel>
                   <IonInput
                     fill="outline"
                     style={{ marginTop: "10px", marginBottom: "10px" }}
-                    autocomplete="new-password"
+                    autocomplete="postal-code"
                     type="text"
                     onKeyPress={(event) => {
                       if (!/[0-9]/.test(event.key)) {
@@ -274,25 +283,12 @@ const Signup: React.FC = () => {
                     {errors.zip?.message}
                   </span>
                 </IonCol>
-                <IonCol size="6" className="pr-5">
-                  <IonLabel>State</IonLabel>
-                  <IonInput
-                    fill="outline"
-                    style={{ marginTop: "10px", marginBottom: "10px" }}
-                    autocomplete="new-password"
-                    type="text"
-                    {...register("state", { required: true })}
-                  ></IonInput>
-                  <span style={{ float: "left", color: "red" }}>
-                    {errors.state?.message}
-                  </span>
-                </IonCol>
                 <IonCol size="6" className="pl-5">
                   <IonLabel>Date of birth</IonLabel>
                   <IonInput
                     fill="outline"
                     style={{ marginTop: "10px", marginBottom: "10px" }}
-                    autocomplete="new-password"
+                    autocomplete="bday"
                     id="click-trigger"
                     value={dob}
                     readonly
@@ -322,7 +318,7 @@ const Signup: React.FC = () => {
                   <IonInput
                     fill="outline"
                     style={{ marginTop: "10px", marginBottom: "10px" }}
-                    autocomplete="new-password"
+                    autocomplete="email"
                     type="email"
                     {...register("email", { required: true })}
                   ></IonInput>
@@ -421,8 +417,7 @@ const Signup: React.FC = () => {
                   <IonInput
                     fill="outline"
                     style={{ marginTop: "10px", marginBottom: "10px" }}
-                    autocomplete="new-password"
-                    type="text"
+                    type="password"
                     onKeyPress={(event) => {
                       if (!/[0-9]/.test(event.key)) {
                         event.preventDefault();
@@ -440,7 +435,7 @@ const Signup: React.FC = () => {
                   <IonInput
                     fill="outline"
                     style={{ marginTop: "10px", marginBottom: "10px" }}
-                    autocomplete="new-password"
+                    autocomplete="tel"
                     type="text"
                     onKeyPress={(event) => {
                       if (!/[0-9]/.test(event.key)) {
