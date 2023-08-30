@@ -35,3 +35,79 @@ Warning When installing via git, it is a common error to use the master branch. 
 Warning Foundry installs the latest version initially, but subsequent forge update commands will use the master branch.
 $ forge install OpenZeppelin/openzeppelin-contracts
 Add @openzeppelin/contracts/=lib/openzeppelin-contracts/contracts/ in remappings.txt.
+
+
+ERC20 ReadMe:
+ERC 20
+
+Note
+This document is better viewed at https://docs.openzeppelin.com/contracts/api/token/erc20
+This set of interfaces, contracts, and utilities are all related to the ERC20 Token Standard.
+
+Tip
+For an overview of ERC20 tokens and a walk through on how to create a token contract read our ERC20 guide.
+There are a few core contracts that implement the behavior specified in the EIP:
+
+{IERC20}: the interface all ERC20 implementations should conform to.
+
+{IERC20Metadata}: the extended ERC20 interface including the name, symbol and decimals functions.
+
+{ERC20}: the implementation of the ERC20 interface, including the name, symbol and decimals optional standard extension to the base interface.
+
+Additionally there are multiple custom extensions, including:
+
+{ERC20Burnable}: destruction of own tokens.
+
+{ERC20Capped}: enforcement of a cap to the total supply when minting tokens.
+
+{ERC20Pausable}: ability to pause token transfers.
+
+{ERC20Permit}: gasless approval of tokens (standardized as ERC2612).
+
+{ERC20FlashMint}: token level support for flash loans through the minting and burning of ephemeral tokens (standardized as ERC3156).
+
+{ERC20Votes}: support for voting and vote delegation.
+
+{ERC20Wrapper}: wrapper to create an ERC20 backed by another ERC20, with deposit and withdraw methods. Useful in conjunction with {ERC20Votes}.
+
+{ERC4626}: tokenized vault that manages shares (represented as ERC20) that are backed by assets (another ERC20).
+
+Finally, there are some utilities to interact with ERC20 contracts in various ways:
+
+{SafeERC20}: a wrapper around the interface that eliminates the need to handle boolean return values.
+
+Other utilities that support ERC20 assets can be found in codebase:
+
+ERC20 tokens can be timelocked (held tokens for a beneficiary until a specified time) or vested (released following a given schedule) using a {VestingWallet}.
+
+Note
+This core set of contracts is designed to be unopinionated, allowing developers to access the internal functions in ERC20 (such as _mint) and expose them as external functions in the way they prefer.
+Core
+
+{{IERC20}}
+
+{{IERC20Metadata}}
+
+{{ERC20}}
+
+Extensions
+
+{{ERC20Burnable}}
+
+{{ERC20Capped}}
+
+{{ERC20Pausable}}
+
+{{ERC20Permit}}
+
+{{ERC20Votes}}
+
+{{ERC20Wrapper}}
+
+{{ERC20FlashMint}}
+
+{{ERC4626}}
+
+Utilities
+
+{{SafeERC20}}
