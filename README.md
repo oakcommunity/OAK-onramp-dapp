@@ -34,7 +34,7 @@ Warning Foundry installs the latest version initially, but subsequent forge upda
 $ forge install OpenZeppelin/openzeppelin-contracts
 Add @openzeppelin/contracts/=lib/openzeppelin-contracts/contracts/ in remappings.txt.
 
-When a user signs up -> our backend triggers an event where 1 OAK token is being sent via rainbow wallet rails. We currently trigger it via through number of contracts avaible OpenZeppelin  which if fired from AWS.
+When a user signs up -> our backend triggers an event where 1 OAK token is being sent via rainbow wallet rails. We currently trigger it via through number of contracts avaible OpenZeppelin  which is fired from AWS.
 
 
 ERC20 ReadMe:
