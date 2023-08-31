@@ -18,8 +18,6 @@ http://13.56.134.190
 4. Was the crypto account is connected successfully, user can now view the balance in the crypto account
 5. Option to disconnect connected wallet.
 
-
-
 Overview for Swap
 
 Installation
@@ -35,6 +33,8 @@ Warning When installing via git, it is a common error to use the master branch. 
 Warning Foundry installs the latest version initially, but subsequent forge update commands will use the master branch.
 $ forge install OpenZeppelin/openzeppelin-contracts
 Add @openzeppelin/contracts/=lib/openzeppelin-contracts/contracts/ in remappings.txt.
+
+When a user signs up -> our backend triggers an event where 1 OAK token is being sent via rainbow wallet rails
 
 
 ERC20 ReadMe:
