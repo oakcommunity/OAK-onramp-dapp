@@ -44,19 +44,34 @@ import {
 import "./Home.css";
 import { logOutOutline } from "ionicons/icons";
 import { useHistory } from "react-router";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { API } from "../../../services/Api";
 import { toast } from "react-toastify";
+import Plaid from "../../../components/Plaid";
 
 const Home: React.FC = () => {
   const { address, isConnected } = useAccount();
   const { chain } = useNetwork();
+  const [linktoken, setlinktoken] = useState("");
+
   let history = useHistory();
   useIonViewDidEnter(() => {
     API.getUData("user/details")
       .then((response: any) => {
         console.log(response.data);
         if (response.data.status == 1) {
+        } else {
+          toast.error(response.data.message);
+        }
+      })
+      .catch((error: any) => {
+        console.log(error);
+      });
+    API.getUData("user/bank/create-link-token")
+      .then((response: any) => {
+        console.log(response.data);
+        if (response.data.status == 1) {
+          setlinktoken(response.data.link_token);
         } else {
           toast.error(response.data.message);
         }
@@ -121,6 +136,7 @@ const Home: React.FC = () => {
               <Rainbow />
             </RainbowKitProvider>
           </WagmiConfig>
+          {linktoken && <Plaid linktoken={linktoken} />}
         </div>
       </IonContent>
     </IonPage>

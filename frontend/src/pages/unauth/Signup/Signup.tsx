@@ -24,7 +24,7 @@ import { useState } from "react";
 import React from "react";
 import { toast } from "react-toastify";
 import { eye, eyeOff } from "ionicons/icons";
-
+import logo from "./../../../assets/images/logo.png";
 const Signup: React.FC = () => {
   const [ptype, setptype] = useState<any>("password");
   const [cptype, csetptype] = useState<any>("password");
@@ -64,52 +64,48 @@ const Signup: React.FC = () => {
       .required("Email is required")
       .email("Invalid email address"),
     phone: Yup.string()
-      .required("Phone is mendatory")
-      .min(10, "Phone must be at 10 number")
-      .max(10, "Phone must be at 10 number"),
-    fname: Yup.string().required("First name is mendatory"),
-    lname: Yup.string().required("Last name is mendatory"),
-    dob: Yup.string().required("Date of birth is mendatory"),
-    address_line_1: Yup.string().required("Street address is mendatory"),
+      .required("Phone is required")
+      .min(10, "Phone must contain 10 digits")
+      .max(10, "Phone must contain 10 digits"),
+    fname: Yup.string().required("First name is required"),
+    lname: Yup.string().required("Last name is required"),
+    dob: Yup.string().required("Date of birth is required"),
+    address_line_1: Yup.string().required("Street address is required"),
     address_line_2: Yup.string(),
-    city: Yup.string().required("City is mendatory"),
+    city: Yup.string().required("City is required"),
     zip: Yup.string()
-      .required("Postal code is mendatory")
-      .min(5, "Postal must be at 5 number")
-      .max(5, "Postal must be at 5 number"),
-    state: Yup.string().required("State is mendatory"),
+      .required("Postal code is required")
+      .min(5, "Postal code must contain 5 digits")
+      .max(5, "Postal code must contain 5 digits"),
+    state: Yup.string().required("State is required"),
     signed_agreement_id: Yup.string(),
     ssn: Yup.string()
-      .required("SSN is mendatory")
-      .min(9, "SSN must be at 9 number")
-      .max(9, "SSN must be at 9 number"),
+      .required("SSN is required")
+      .min(9, "SSN must contain 9 digits")
+      .max(9, "SSN must contain 9 digits"),
     password: Yup.string()
       .required("Password is required")
-      .min(6, "Password length should be at least 6 characters")
-      .max(12, "Password cannot exceed more than 12 characters")
+      .min(6, "Password should be at least 8 characters")
       .matches(
         /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/,
-        "Must Contain 8 Characters, One Uppercase, One Lowercase, One Number and One Special Case Character"
+        "Must contain at least 8 characters. One Uppercase, One Lowercase, One Number and One Special Case Character"
       ),
     confirm_password: Yup.string()
-      .required("Confirm Password is required")
-      .min(6, "Password length should be at least 6 characters")
-      .max(12, "Password cannot exceed more than 12 characters")
+      .required("Password Confirmation is required")
+      .min(6, "Password should be at least 8 characters")
       .oneOf([Yup.ref("password")], "Password & Confirm password are not same")
       .matches(
         /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/,
-        "Must Contain 8 Characters, One Uppercase, One Lowercase, One Number and One Special Case Character"
+        "Must contain at least 8 characters. One Uppercase, One Lowercase, One Number and One Special Case Character"
       ),
-    term: Yup.boolean().oneOf([true], "Terms is mendatory"),
+    term: Yup.boolean().oneOf([true], "Terms and Conditions are required"),
   });
   const formOptions = { resolver: yupResolver(formSchema) };
   const { register, handleSubmit, formState, setValue } = useForm(formOptions);
   const { errors } = formState;
   const onSubmit = handleSubmit((data) => {
-    console.log(data);
     API.common_api("auth/register-user", data)
       .then((response: any) => {
-        console.log(response.data);
         if (response.data.status == 1) {
           toast.success(response.data.message);
           window.location.assign("/");
@@ -125,62 +121,104 @@ const Signup: React.FC = () => {
     <IonPage>
       <IonContent fullscreen>
         <IonGrid>
-          <IonRow>
-            <IonCol size="7" className="ion-hide-md-down set-back"></IonCol>
+          <IonRow class="ion-justify-content-center">
+            <IonCol
+              style={{ marginTop: "50px" }}
+              size="3"
+              className="ion-hide-md-down "
+            >
+              <p className="logo">
+                <img src={logo}></img>
+              </p>
+              <p className="content">
+                Your use of OAK currency at participating merchants will help
+                support the community while earning 5% cashback
+              </p>
+              <IonItem lines="none" className="mt-10">
+                <p slot="start" className="circle">
+                  1
+                </p>
+                <IonLabel class="ion-text-wrap" style={{ marginLeft: "48px" }}>
+                  <p className="heading">
+                    <b>Exchange your USD for OAK</b>
+                  </p>
+                  <p className="heading2">
+                    Fill out your information to purchase OAK currency
+                  </p>
+                </IonLabel>
+              </IonItem>
+              <IonItem lines="none" className="mt-10">
+                <p slot="start" className="circle">
+                  2
+                </p>
+                <IonLabel class="ion-text-wrap" style={{ marginLeft: "48px" }}>
+                  <p className="heading">Download a crypto wallet</p>
+                  <p className="heading2">
+                    Take your currency with you in a mobile crypto wallet
+                  </p>
+                </IonLabel>
+              </IonItem>
+              <IonItem lines="none" className="mt-10">
+                <p slot="start" className="circle">
+                  3
+                </p>
+                <IonLabel class="ion-text-wrap" style={{ marginLeft: "48px" }}>
+                  <p className="heading">Spend your OAK</p>
+                  <p className="heading2">
+                    Use your OAK currency at participating merchants
+                  </p>
+                </IonLabel>
+              </IonItem>
+            </IonCol>
             <IonCol
               size="12"
-              sizeMd="5"
-              style={{ padding: "20px", height: "100vh", overflow: "auto" }}
+              sizeMd="3"
+              style={{ padding: "20px", height: "100vh" }}
             >
               <IonRow>
-                <IonCol size="2" style={{ marginTop: "50px" }}>
-                  <img
-                    style={{ height: "80px", borderRadius: "20px" }}
-                    src="https://ionicframework.com/docs/img/demos/thumbnail.svg"
-                    alt="logo"
-                  />
-                </IonCol>
                 <IonCol
                   style={{
                     display: "flex",
                     alignItems: "center",
-                    marginTop: "40px",
+                    marginTop: "50px",
                   }}
                 >
-                  <h2>OAK Crypto</h2>
+                  <h2
+                    style={{
+                      fontFamily: "Satoshi Variable",
+                      fontSize: "24px",
+                      fontStyle: "normal",
+                      fontWeight: "700",
+                      lineHeight: "normal",
+                    }}
+                  >
+                    Get OAK currency
+                  </h2>
                 </IonCol>
               </IonRow>
               <IonRow>
-                <IonCol size="6">
+                <IonCol size="12">
                   <IonLabel>First Name</IonLabel>
-                  <IonItem
+                  <IonInput
                     fill="outline"
                     style={{ marginTop: "10px", marginBottom: "10px" }}
-                  >
-                    <IonInput
-                      autocomplete="new-password"
-                      placeholder="Your first name"
-                      type="text"
-                      {...register("fname", { required: true })}
-                    ></IonInput>
-                  </IonItem>
+                    autocomplete="given-name"
+                    type="text"
+                    {...register("fname", { required: true })}
+                  ></IonInput>
                   <span style={{ float: "left", color: "red" }}>
                     {errors.fname?.message}
                   </span>
                 </IonCol>
-                <IonCol size="6">
+                <IonCol size="12">
                   <IonLabel>Last Name</IonLabel>
-                  <IonItem
+                  <IonInput
                     fill="outline"
                     style={{ marginTop: "10px", marginBottom: "10px" }}
-                  >
-                    <IonInput
-                      autocomplete="new-password"
-                      placeholder="Your last name"
-                      type="text"
-                      {...register("lname", { required: true })}
-                    ></IonInput>
-                  </IonItem>
+                    autocomplete="family-name"
+                    type="text"
+                    {...register("lname", { required: true })}
+                  ></IonInput>
                   <span style={{ float: "left", color: "red" }}>
                     {errors.lname?.message}
                   </span>
@@ -189,245 +227,224 @@ const Signup: React.FC = () => {
               <IonRow>
                 <IonCol size="12">
                   <IonLabel>Street address</IonLabel>
-                  <IonItem
+                  <IonInput
                     fill="outline"
                     style={{ marginTop: "10px", marginBottom: "10px" }}
-                  >
-                    <IonInput
-                      autocomplete="new-password"
-                      placeholder="Your address"
-                      type="text"
-                      {...register("address_line_1", { required: true })}
-                    ></IonInput>
-                  </IonItem>
+                    autocomplete="street-address"
+                    type="text"
+                    {...register("address_line_1", { required: true })}
+                  ></IonInput>
                   <span style={{ float: "left", color: "red" }}>
                     {errors.address_line_1?.message}
                   </span>
                 </IonCol>
-                <IonCol size="6">
+                <IonCol size="6" className="pr-5">
                   <IonLabel>City</IonLabel>
-                  <IonItem
+                  <IonInput
                     fill="outline"
                     style={{ marginTop: "10px", marginBottom: "10px" }}
-                  >
-                    <IonInput
-                      autocomplete="new-password"
-                      placeholder="Your city"
-                      type="text"
-                      {...register("city", { required: true })}
-                    ></IonInput>
-                  </IonItem>
+                    autocomplete="address-level2"
+                    type="text"
+                    {...register("city", { required: true })}
+                  ></IonInput>
                   <span style={{ float: "left", color: "red" }}>
                     {errors.city?.message}
                   </span>
                 </IonCol>
-                <IonCol size="6">
-                  <IonLabel>Postal code</IonLabel>
-                  <IonItem
-                    fill="outline"
-                    style={{ marginTop: "10px", marginBottom: "10px" }}
-                  >
-                    <IonInput
-                      autocomplete="new-password"
-                      placeholder="Your postal code"
-                      type="text"
-                      onKeyPress={(event) => {
-                        if (!/[0-9]/.test(event.key)) {
-                          event.preventDefault();
-                        }
-                      }}
-                      maxlength={5}
-                      {...register("zip", { required: true })}
-                    ></IonInput>
-                  </IonItem>
-                  <span style={{ float: "left", color: "red" }}>
-                    {errors.zip?.message}
-                  </span>
-                </IonCol>
-                <IonCol size="6">
+                <IonCol size="6" className="pr-5">
                   <IonLabel>State</IonLabel>
-                  <IonItem
+                  <IonInput
                     fill="outline"
                     style={{ marginTop: "10px", marginBottom: "10px" }}
-                  >
-                    <IonInput
-                      autocomplete="new-password"
-                      placeholder="Your state"
-                      type="text"
-                      {...register("state", { required: true })}
-                    ></IonInput>
-                  </IonItem>
+                    autocomplete="address-level1"
+                    type="text"
+                    {...register("state", { required: true })}
+                  ></IonInput>
                   <span style={{ float: "left", color: "red" }}>
                     {errors.state?.message}
                   </span>
                 </IonCol>
-                <IonCol size="6">
-                  <IonLabel>Date of birth</IonLabel>
-                  <IonItem
+                <IonCol size="6" className="pl-5">
+                  <IonLabel>Postal code</IonLabel>
+                  <IonInput
                     fill="outline"
                     style={{ marginTop: "10px", marginBottom: "10px" }}
+                    autocomplete="postal-code"
+                    type="text"
+                    onKeyPress={(event) => {
+                      if (!/[0-9]/.test(event.key)) {
+                        event.preventDefault();
+                      }
+                    }}
+                    maxlength={5}
+                    {...register("zip", { required: true })}
+                  ></IonInput>
+                  <span style={{ float: "left", color: "red" }}>
+                    {errors.zip?.message}
+                  </span>
+                </IonCol>
+                <IonCol size="6" className="pl-5">
+                  <IonLabel>Date of birth</IonLabel>
+                  <IonInput
+                    fill="outline"
+                    style={{ marginTop: "10px", marginBottom: "10px" }}
+                    autocomplete="bday"
+                    id="click-trigger"
+                    value={dob}
+                    readonly
+                    type="text"
+                    {...register("dob", { required: true })}
+                  ></IonInput>
+                  <IonPopover
+                    side="top"
+                    trigger="click-trigger"
+                    triggerAction="click"
+                    show-backdrop="false"
                   >
-                    <IonInput
-                      autocomplete="new-password"
-                      id="click-trigger"
-                      value={dob}
-                      readonly
-                      placeholder="Your date of birth"
-                      type="text"
-                      {...register("dob", { required: true })}
-                    ></IonInput>
-                    <IonPopover
-                      side="top"
-                      trigger="click-trigger"
-                      triggerAction="click"
-                      show-backdrop="false"
-                    >
-                      <IonContent>
-                        <IonDatetime
-                          showDefaultButtons={true}
-                          presentation="date"
-                          onIonChange={(e) => setDOB(e)}
-                        ></IonDatetime>
-                      </IonContent>
-                    </IonPopover>
-                  </IonItem>
+                    <IonContent>
+                      <IonDatetime
+                        showDefaultButtons={true}
+                        presentation="date"
+                        onIonChange={(e) => setDOB(e)}
+                      ></IonDatetime>
+                    </IonContent>
+                  </IonPopover>
                   <span style={{ float: "left", color: "red" }}>
                     {errors.dob?.message}
                   </span>
                 </IonCol>
                 <IonCol size="12">
                   <IonLabel>Email address</IonLabel>
-                  <IonItem
+                  <IonInput
                     fill="outline"
                     style={{ marginTop: "10px", marginBottom: "10px" }}
-                  >
-                    <IonInput
-                      autocomplete="new-password"
-                      placeholder="Your email"
-                      type="email"
-                      {...register("email", { required: true })}
-                    ></IonInput>
-                  </IonItem>
+                    autocomplete="email"
+                    type="email"
+                    {...register("email", { required: true })}
+                  ></IonInput>
                   <span style={{ float: "left", color: "red" }}>
                     {errors.email?.message}
                   </span>
                 </IonCol>
                 <IonCol size="12">
                   <IonLabel>Password</IonLabel>
-                  <IonItem
+                  <IonInput
                     fill="outline"
                     style={{ marginTop: "10px", marginBottom: "10px" }}
-                  >
-                    <IonInput
-                      autocomplete="new-password"
-                      placeholder="Your password"
-                      type={ptype}
-                      {...register("password", { required: true })}
-                    ></IonInput>
-                    {ptype == "text" && (
-                      <IonIcon
-                        className="suffix-icon"
-                        onClick={() => setptype("password")}
-                        style={{ marginTop: "14px" }}
-                        color="dark"
-                        icon={eyeOff}
-                        slot="end"
-                      ></IonIcon>
-                    )}
-                    {ptype == "password" && (
-                      <IonIcon
-                        className="suffix-icon"
-                        style={{ marginTop: "14px" }}
-                        onClick={() => setptype("text")}
-                        color="dark"
-                        icon={eye}
-                        slot="end"
-                      ></IonIcon>
-                    )}
-                  </IonItem>
+                    autocomplete="new-password"
+                    type={ptype}
+                    {...register("password", { required: true })}
+                  ></IonInput>
+                  {ptype == "text" && (
+                    <IonIcon
+                      className="suffix-icon"
+                      onClick={() => setptype("password")}
+                      style={{
+                        marginTop: "45px",
+                        zIndex: "9999",
+                        position: "absolute",
+                        right: "18px",
+                        top: "5px",
+                      }}
+                      color="dark"
+                      icon={eyeOff}
+                    ></IonIcon>
+                  )}
+                  {ptype == "password" && (
+                    <IonIcon
+                      className="suffix-icon"
+                      style={{
+                        marginTop: "45px",
+                        zIndex: "9999",
+                        position: "absolute",
+                        right: "18px",
+                        top: "5px",
+                      }}
+                      onClick={() => setptype("text")}
+                      color="dark"
+                      icon={eye}
+                    ></IonIcon>
+                  )}
                   <span style={{ float: "left", color: "red" }}>
                     {errors.password?.message}
                   </span>
                 </IonCol>
                 <IonCol size="12">
                   <IonLabel>Confirm password</IonLabel>
-                  <IonItem
+                  <IonInput
                     fill="outline"
                     style={{ marginTop: "10px", marginBottom: "10px" }}
-                  >
-                    <IonInput
-                      autocomplete="new-password"
-                      placeholder="Your confirm password"
-                      type={cptype}
-                      {...register("confirm_password", { required: true })}
-                    ></IonInput>
-                    {cptype == "text" && (
-                      <IonIcon
-                        className="suffix-icon"
-                        onClick={() => csetptype("password")}
-                        style={{ marginTop: "14px" }}
-                        color="dark"
-                        icon={eyeOff}
-                        slot="end"
-                      ></IonIcon>
-                    )}
-                    {cptype == "password" && (
-                      <IonIcon
-                        className="suffix-icon"
-                        style={{ marginTop: "14px" }}
-                        onClick={() => csetptype("text")}
-                        color="dark"
-                        icon={eye}
-                        slot="end"
-                      ></IonIcon>
-                    )}
-                  </IonItem>
+                    autocomplete="new-password"
+                    type={cptype}
+                    {...register("confirm_password", { required: true })}
+                  ></IonInput>
+                  {cptype == "text" && (
+                    <IonIcon
+                      className="suffix-icon"
+                      onClick={() => csetptype("password")}
+                      style={{
+                        marginTop: "45px",
+                        zIndex: "9999",
+                        position: "absolute",
+                        right: "18px",
+                        top: "5px",
+                      }}
+                      color="dark"
+                      icon={eyeOff}
+                    ></IonIcon>
+                  )}
+                  {cptype == "password" && (
+                    <IonIcon
+                      className="suffix-icon"
+                      style={{
+                        marginTop: "45px",
+                        position: "absolute",
+                        right: "18px",
+                        zIndex: "9999",
+                        top: "5px",
+                      }}
+                      onClick={() => csetptype("text")}
+                      color="dark"
+                      icon={eye}
+                    ></IonIcon>
+                  )}
                   <span style={{ float: "left", color: "red" }}>
                     {errors.confirm_password?.message}
                   </span>
                 </IonCol>
-                <IonCol size="6">
+                <IonCol size="6" className="pr-5">
                   <IonLabel>SSN</IonLabel>
-                  <IonItem
+                  <IonInput
                     fill="outline"
                     style={{ marginTop: "10px", marginBottom: "10px" }}
-                  >
-                    <IonInput
-                      autocomplete="new-password"
-                      placeholder="Your SSN"
-                      type="text"
-                      onKeyPress={(event) => {
-                        if (!/[0-9]/.test(event.key)) {
-                          event.preventDefault();
-                        }
-                      }}
-                      maxlength={9}
-                      {...register("ssn", { required: true })}
-                    ></IonInput>
-                  </IonItem>
+                    type="password"
+                    onKeyPress={(event) => {
+                      if (!/[0-9]/.test(event.key)) {
+                        event.preventDefault();
+                      }
+                    }}
+                    maxlength={9}
+                    {...register("ssn", { required: true })}
+                  ></IonInput>
                   <span style={{ float: "left", color: "red" }}>
                     {errors.ssn?.message}
                   </span>
                 </IonCol>
-                <IonCol size="6">
+                <IonCol size="6" class="pl-5">
                   <IonLabel>Phone</IonLabel>
-                  <IonItem
+                  <IonInput
                     fill="outline"
                     style={{ marginTop: "10px", marginBottom: "10px" }}
-                  >
-                    <IonInput
-                      autocomplete="new-password"
-                      placeholder="Your Phone"
-                      type="text"
-                      onKeyPress={(event) => {
-                        if (!/[0-9]/.test(event.key)) {
-                          event.preventDefault();
-                        }
-                      }}
-                      maxlength={10}
-                      {...register("phone", { required: true })}
-                    ></IonInput>
-                  </IonItem>
+                    autocomplete="tel"
+                    type="text"
+                    onKeyPress={(event) => {
+                      if (!/[0-9]/.test(event.key)) {
+                        event.preventDefault();
+                      }
+                    }}
+                    maxlength={10}
+                    {...register("phone", { required: true })}
+                  ></IonInput>
                   <span style={{ float: "left", color: "red" }}>
                     {errors.phone?.message}
                   </span>
@@ -448,22 +465,13 @@ const Signup: React.FC = () => {
                 </IonCol>
               </IonRow>
               <IonRow>
-                <IonCol
-                  size="12"
-                  sizeSm="6"
-                  sizeMd="4"
-                  style={{ textAlign: "center" }}
-                >
-                  <IonButton
-                    style={{ textTransform: "none" }}
-                    shape="round"
-                    onClick={onSubmit}
-                  >
-                    Signup
-                  </IonButton>
+                <IonCol size="12" style={{ textAlign: "center" }}>
+                  <button className="btn-large2" onClick={onSubmit}>
+                    Continue
+                  </button>
                 </IonCol>
               </IonRow>
-              <IonRow>
+              <IonRow className="mt-10">
                 <IonCol size="12" style={{ textAlign: "center" }}>
                   <p>
                     Already have an account?
